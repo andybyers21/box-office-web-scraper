@@ -8,10 +8,6 @@ from requests_html import HTML
 BASE_DIR = os.path.dirname(__file__)
 
 
-now = datetime.datetime.now()
-year = now.year
-
-
 def url_to_txt(url, filename="world.html", save=False):
     r = requests.get(url)
     if r.status_code == 200:
@@ -61,5 +57,15 @@ def parse_and_extract(url, name='2020'):
         df.to_csv(filepath, index=False)
 
 
-url = 'https://www.boxofficemojo.com/year/world/2020'
-parse_and_extract(url)
+def run(start_year=None, years_ago=10):
+    if start_year == None:
+        now = datetime.datetime.now()
+        start_year = now.year
+    assert isinstance(start_year, int)
+    assert len(f"{start_year}") == 4
+    url = f"https://www.boxofficemojo.com/year/world/{start_year}/"
+    parse_and_extract(url, name=start_year)
+
+
+if __name__ == "__main__":
+    run()
