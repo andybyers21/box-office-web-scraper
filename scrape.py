@@ -10,6 +10,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 
 def url_to_txt(url, filename="world.html", save=False):
+    """ check if status code 200 get data for defined year from boxofficemojo.com with python requests """
     r = requests.get(url)
     if r.status_code == 200:
         html_text = r.text
@@ -24,18 +25,19 @@ url = 'https://www.boxofficemojo.com/year/world/'
 
 
 def parse_and_extract(url, name='2020'):
+    """ loop through rows & cols to Verify that r_table is a list.
+        Parse HTML & CSS.
+        Return raw data as CSV.
+    """
     html_text = url_to_txt(url)
     if html_text == None:
         return False
     r_html = HTML(html=html_text)
     table_class = ".imdb-scroll-table"
-    # table_class = "#table"
     r_table = r_html.find(table_class)
     table_data = []
     header_names = []
-    # print(r_table)
 
-    # Verify that r_table is a list, parse data.
     if len(r_table) == 0:
         return False
     parsed_table = r_table[0]           # table
@@ -45,12 +47,9 @@ def parse_and_extract(url, name='2020'):
     header_names = [x.text for x in header_cols]
 
     for row in rows[1:]:
-        # loop rows and cols, return raw data at specific point
-        # print(row.text)
         cols = row.find("td")
         row_data = []
         for i, col in enumerate(cols):
-            # print(i, col.text, '\n\n')
             row_data.append(col.text)
         table_data.append(row_data)
     df = pd.DataFrame(table_data, columns=header_names)
@@ -63,6 +62,7 @@ def parse_and_extract(url, name='2020'):
 
 
 def run(start_year=None, years_ago=1):
+    """ Run the scraper, scrape multiple iterations of... """
     if start_year == None:
         now = datetime.datetime.now()
         start_year = now.year
