@@ -20,7 +20,7 @@ python -i scrape.py 2020
 Or a specific number or years in the past
 
 ```shell
-python -i scrape.py <start_year> <years to go back>
+python -i scrape.py <start_year> <years_ago>
 ```
 
 e.g.
