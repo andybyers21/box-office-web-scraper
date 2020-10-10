@@ -2,6 +2,7 @@ import datetime
 import os
 import pandas as pd
 import requests
+import sys
 from requests_html import HTML
 
 
@@ -57,15 +58,27 @@ def parse_and_extract(url, name='2020'):
         df.to_csv(filepath, index=False)
 
 
-def run(start_year=None, years_ago=10):
+def run(start_year=None, years_ago=1):
     if start_year == None:
         now = datetime.datetime.now()
         start_year = now.year
     assert isinstance(start_year, int)
+    assert isinstance(years_ago, int)
     assert len(f"{start_year}") == 4
-    url = f"https://www.boxofficemojo.com/year/world/{start_year}/"
-    parse_and_extract(url, name=start_year)
+    for i in range(0, years_ago + 1):
+        url = f"https://www.boxofficemojo.com/year/world/{start_year}/"
+        parse_and_extract(url, name=start_year)
+        print(f"finished {start_year}")
+        start_year -= 1
 
 
 if __name__ == "__main__":
-    run()
+    try:
+        start = int(sys.argv[1])
+    except:
+        start = None
+    try:
+        count = int(sys.argv[2])
+    except:
+        count = 0
+    run(start_year=start, years_ago=count)
