@@ -1,10 +1,11 @@
 # A Python Box-Office Movie Takings Web Scraper
 
-Extract box office takings for a defined timeframe from [boxofficemojo.com](https://www.boxofficemojo.com/year/world/) to CSV.
+Extract historical data from [boxofficemojo.com](https://www.boxofficemojo.com/year/world/). A script to scrape box office takings for a defined timeframe to CSV.
 
 Using Requests-HTML and Pandas for CSV conversion.
 
 ## How to use:
+
 run `python -i scrape.py` followed by your arguments (no arguments will default to the current year only), e.g:
 
 To scrape data from a specific year:
