@@ -1,6 +1,6 @@
 # A Python Box-Office Movie Takings Web Scraper
 
-Scrape raw box-office data from [boxofficemojo.com](https://www.boxofficemojo.com/year/world/) and extract, transform and load in _Jupyter Notebooks_ using Requests-HTML and Pandas for CSV conversion.
+Scrape raw box-office data from [boxofficemojo.com](https://www.boxofficemojo.com/year/world/) and extract, transform and load in _Jupyter Notebooks_ using _Requests-HTML_ and _Pandas_ for CSV conversion.
 
 ## How to use:
 
