@@ -61,7 +61,7 @@ def parse_and_extract(url, name='2020'):
     df = pd.DataFrame(table_data, columns=header_names)
     path = os.path.join(BASE_DIR, 'data')
     os.makedirs(path, exist_ok=True)
-    filepath = os.path.join(f'data/boxofficemojo {name} rankings.csv')
+    filepath = os.path.join(f'data/{name}_boxofficemojo_rankings.csv')
     df.to_csv(filepath, index=False)
     return True
 
